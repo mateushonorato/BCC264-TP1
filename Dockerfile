@@ -1,8 +1,6 @@
-FROM ubuntu:latest
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y g++ psmisc gcc vim grep
-COPY . /MateusHonorato
-# RUN make /app
-# CMD apt-get update && apt-get install -y g++ psmisc 
-## && g++ /MateusHonorato/Programa1.cpp -o /MateusHonorato/Programa1 && ./MateusHonorato/Programa1
+FROM alpine:latest
+RUN apk add --no-cache psmisc gcc g++ vim grep make
+COPY media/MateusHonorato.txt /MateusHonorato/
+COPY src /MateusHonorato/src/
+COPY Makefile /MateusHonorato
+RUN cd /MateusHonorato && make all
